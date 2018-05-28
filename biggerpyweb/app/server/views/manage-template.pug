@@ -1,0 +1,53 @@
+
+extends layout
+
+block content
+    .nav
+        .nav-header
+            | Manage Template
+        .nav-info
+            #btn-logout
+                a(href="#" title="Log Out")
+                    img(src="/img/退出账号.png")
+            #btn-home
+                a(href="#" title="editor")
+                    | Editor
+    div#left-side
+        div#template
+            select#selectSampleCode(class='11', onchange='getTemplate()')
+                optgroup
+                    option Template Code 
+        #control
+            button#btn-create
+                |Open blank
+            button#btn-add
+                |Add
+            button#btn-update
+                |Update
+            button#btn-delete
+                |Delete
+    div#right-side
+        input.form-control#lesson-num(type='number', placeholder="Lesson Number" value="") 
+        input.form-control#lesson-title(type='text', placeholder="Lesson Title" value="")
+        #editorContent
+        #editorContentFinal
+        //textarea#template-input.form-control(rows='18', placeholder="Lesson Template Content" )
+        //textarea#final-input.form-control(rows='20', placeholder="Lesson Final Content")
+    include modals/alert
+    include modals/confirm
+
+block scripts
+    script(src='/vendor/jquery-2.2.3.min.js')
+    script(src='/vendor/jquery.form.min.js')
+    script(src='/vendor/bootstrap.min.js')
+    script(src='/js/ace/ace.js', type='text/javascript', charset='utf-8')
+    script(src='/js/ace/ext-language_tools.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js')
+    script(type='text/javascript')
+        | var user = !{JSON.stringify(typeof(udata) != 'undefined' ? udata : { })};
+    script(src="/js/views/template.js")
+    script(src='/js/controllers/navbarController.js')
+    script(src='/js/controllers/templateController.js')
+       
+   
+    
