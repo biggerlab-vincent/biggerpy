@@ -428,6 +428,19 @@ module.exports = function(app) {
 		}
 	});
 	
+	//mycode 
+	app.get('/mycode', function (req, res) {
+		if (req.session.user == null) {
+			// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		} else {
+			res.render('mycode', {
+				title: 'My code list',
+				udata: req.session.user
+			});
+		}
+	});
+
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };

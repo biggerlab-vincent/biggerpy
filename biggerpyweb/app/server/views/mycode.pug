@@ -1,0 +1,90 @@
+
+extends layout
+block content
+	.nav
+		.nav-header
+			| Manage My Code
+		.nav-info
+			#btn-logout
+				a(href="#" title="Log Out")
+					img(src="/img/退出账号.png")
+			#btn-home
+				a(href="/home" title="Editor")
+					| Editor
+	div#code-ls
+		.well
+			ul.demo-ls
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					div.code-control
+						button#code_editor.btn
+							|edit
+						button#code_delete.btn
+							|delete
+					p #userId
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					p #userId
+					button#code_editor
+						|edit
+					button#code_delete
+						|delete
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					p #userId
+					button#code_editor
+						|edit
+					button#code_delete
+						|delete
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					p #userId
+					button#code_editor
+						|edit
+					button#code_delete
+						|delete
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					p #userId
+					button#code_editor
+						|edit
+					button#code_delete
+						|delete
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					p #userId
+					button#code_editor
+						|edit
+					button#code_delete
+						|delete
+				li.demo
+					img(src="/img/code-logo.jpeg")
+					p #userId
+					button#code_editor
+						|edit
+					button#code_delete
+						|delete
+	ul.page
+		li.previous
+			a(href="#" )
+				|上一页
+		li.next
+			a(href="#" )
+				|下一页
+		include modals/alert
+		include modals/confirm
+
+block scripts
+	script(src='/vendor/jquery-2.2.3.min.js')
+	script(src='/vendor/jquery.form.min.js')
+	script(src='/vendor/bootstrap.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js')
+	script(src='/js/ace/ace.js', type='text/javascript', charset='utf-8')
+	script(src='/js/ace/ext-language_tools.js')
+	script(type='text/javascript')                                                   
+		| var user = !{JSON.stringify(typeof(udata) != 'undefined' ? udata : { })};
+	script(src='/js/views/editor.js')
+	script(src='/js/controllers/editorController.js')
+	script(src='/js/controllers/navbarController.js')
+	script(src="https://cdn.bootcss.com/chosen/1.8.5/chosen.jquery.js")
+	
