@@ -5,7 +5,7 @@ exports.addNewTemplate = function(lesson, title, content, contentFinal, callback
     var templates = mongoUtil.getDb().collection('templates');
     //console.
     templates.insert({
-        lesson 	: lesson,
+        lesson: parseInt(lesson),
         title 	: title,
         content : content,
         contentFinal: contentFinal
@@ -20,7 +20,7 @@ exports.updateTemplate = function (id, lesson, title, content, contentFinal, cal
     console.log(getObjectId(id));
     templates.findOneAndUpdate({ _id: getObjectId(id)}, {
             "$set": {
-                "lesson": lesson,
+                "lesson": parseInt(lesson),
                 "title": title,
                 "content": content,
                 "contentFinal": contentFinal
@@ -78,7 +78,12 @@ exports.deleteTemplate = function (id, callback) {
 //load template 
 exports.loadTemplateList = function(callback) {
     var templates = mongoUtil.getDb().collection('templates');
-    templates.find({}, {lesson: 1, title: 1}).sort( { lesson: 1 } ).toArray(function(err,items){
+    templates.find({}, {
+            lesson: 1,
+            title: 1
+        }).sort({
+                lesson: 1
+            }).toArray(function (err, items) {
         if(err) callback(err);
         else callback(null, items);
     });
