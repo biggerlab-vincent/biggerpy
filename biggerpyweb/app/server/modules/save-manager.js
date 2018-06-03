@@ -3,10 +3,11 @@ var mongoUtil = require('./mongoUtil');
 
 
 exports.save = function(user, entry, data, callback) {
-	var saves = mongoUtil.getDb().collection('saves');
+	var saves = mongoUtil.getDb().collection('code');
 	saves.findOne({userID:getObjectId(user._id), entry: entry}, function(e, o) {
 		if (o) {
-            o.data = data;
+			console.log(o);
+			o.data = data;
             saves.save(o, {safe: true}, function(e) {
 				if (e) callback(e);
 				else callback(null, o);

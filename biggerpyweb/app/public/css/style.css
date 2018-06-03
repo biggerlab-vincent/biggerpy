@@ -1,5 +1,4 @@
-  display: none;
-}
+
 ul li{
   list-style-type:none;
 }
@@ -736,7 +735,7 @@ code-list
   
 }
 #code-ls .well {
-  height: 840px;
+  height: 820px;
   width: 100%;
 }
 #code-ls .well .demo-ls{
@@ -754,16 +753,24 @@ code-list
 }
 #code-ls .well .demo-ls .demo img{
   width: 50%;
-  margin: 5px;
-  border-radius: 5px;
+  margin: 10px;
+  border-radius: 10px;
 }
 #code-ls .well .demo-ls .demo .code-control {
   float: right;
   margin-right: 10px;
 }
 #code-ls .well .demo-ls .demo .code-control .btn{
-  width: 90px;
-  display: block;
-  margin-top: 20px;
-
+      width: 100px;
+      display: block;
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+}
+#code-ls .well .demo-ls .demo .code-info {
+  width: 90%;
+  margin: 5px auto;
+}
+#code-ls .well .demo-ls .demo .code-info span{
+  float:right;
 }

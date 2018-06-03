@@ -13,6 +13,7 @@ exports.addNewTemplate = function(lesson, title, content, contentFinal, callback
         if (e) callback(e);
         else callback(null);
     });
+    
 }
 //mongodb update
 exports.updateTemplate = function (id, lesson, title, content, contentFinal, callback) {

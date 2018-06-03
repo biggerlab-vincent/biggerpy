@@ -4,6 +4,7 @@ var SM = require('./modules/save-manager');
 var TemplateManager = require('./modules/template-manager');
 var TeacherManager = require('./modules/teacher-manager');
 var HM = require('./modules/hints-manager');
+var MYCODE = require("./modules/mycode-manage");
 
 module.exports = function(app) {
 
@@ -55,20 +56,29 @@ module.exports = function(app) {
 	});
 
 	app.post('/home/save', function(req, res) {
+		console.log(req.session);
+		console.log(req.body);
 		if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
 			// NOT SAVED!
 			//req.session.?
 		} else {
-			SM.save(req.session.user, req.body['entry'], req.body['data'], function(e, o) {
-				if (e) {
-
-					res.status(400).send('error-saving-code');
-				} else {
-					// Saved
-					res.status(200).send('ok');
-				}
-			});
+			MYCODE.save({
+						id: req.session.user._id,
+						name: req.session.user.name,
+						lessonId: req.body['lesson'],
+						code: req.body['code'],
+						time: req.body['time'],
+						title: "saved" + req.body["time"]
+					},function (e, o) {
+						if (e) {
+							
+							res.status(400).send('error-saving-code');
+						} else {
+							// Saved
+							res.status(200).send('ok');
+						}
+					});
 		}
 	});
 

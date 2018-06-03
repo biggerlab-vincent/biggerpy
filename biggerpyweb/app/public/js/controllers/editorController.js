@@ -269,9 +269,22 @@ function getLesson() {
 }
 
 function save() {
-    $.post("home/save", {"entry": ("save" + selectedID) + (teacherMode ? "teach" : ""), "data": editor.getValue()}, function( data ) {
-        console.log("Saved")
+      var name = prompt("", ""); 
+      if (name)
+      {
+          alert("欢迎您：" + name)
+      }
+    selectedID = $('#selectSampleCode').val();
+    var data = {
+        "lesson":selectedID,
+        "code":editor.getValue(),
+        "time": new Date(),
+        "name": name
+    }
+    $.post("home/save", data , function( data ) {
+        console.log("Saved") 
     });
+     console.log(1)
     setTimeout('editorModalAlert("Successfully Saved.")', 1000);
 }
 
