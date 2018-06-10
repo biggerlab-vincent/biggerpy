@@ -55,9 +55,9 @@ module.exports = function(app) {
 		}
 	});
 
-	app.post('/home/save', function(req, res) {
-		console.log(req.session);
-		console.log(req.body);
+	app.post('/code/save', function(req, res) {
+		//console.log(req.session);
+		//console.log(req.body);
 		if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
 			// NOT SAVED!
@@ -69,7 +69,7 @@ module.exports = function(app) {
 						lessonId: req.body['lesson'],
 						code: req.body['code'],
 						time: req.body['time'],
-						title: "saved" + req.body["time"]
+						title: req.body['name']
 					},function (e, o) {
 						if (e) {
 							
@@ -81,7 +81,24 @@ module.exports = function(app) {
 					});
 		}
 	});
-
+	app.post('/code/load', function (req, res) {
+		if (req.session.user == null) {
+			// if user is not logged-in redirect back to login page //
+			// NOT LOADED!
+			//req.session.?
+		} else {
+			MYCODE.load(req.session.user, function (e, o) {
+				if (e) {
+					console.log(e);
+					res.status(400).send(null);
+				} else {
+					// Loaded
+					console.log(o);
+					res.status(200).send(o)
+				}
+			});
+		}
+	});
 	app.post('/home/load', function(req, res) {
 		if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
@@ -363,6 +380,7 @@ module.exports = function(app) {
 			if (!e){
 				res.status(200).send(o);
 			} else {
+				consol
 				res.status(400).send(null);
 			}
 		});
@@ -447,6 +465,26 @@ module.exports = function(app) {
 			res.render('mycode', {
 				title: 'My code list',
 				udata: req.session.user
+			});
+		}
+	});
+	app.post('/loadCodeList', function (req,res) {
+		//console.log(req.session);
+		if (req.session.user == null) {
+			//console.log(111);
+			// if user is not logged-in redirect back to login page //
+			// NOT LOADED!
+			//req.session.?
+		} else {
+			MYCODE.load(req.session.user,function (e, o) {
+				if (e) {
+					console.log(e);
+					res.status(400).send(null);
+				} else {
+					// Loaded
+					console.log(o);
+					res.status(200).send(o)
+				}
 			});
 		}
 	});

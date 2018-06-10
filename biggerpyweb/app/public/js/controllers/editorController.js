@@ -5,8 +5,8 @@ function EditorController()
 
     $("#btn-replace").click(function(){ replaceIP(); });
     //$("#server-list").click(function(){ getserver(); });
-    $("#btn-save").click(function(){ save(); });
-    $("#btn-load").click(function(){ load(); });
+    $("#btn-save").click(function(){ saveCode(); });
+    //$("#btn-load").click(function () { loadCodeList(); });
     $("#btn-run").click(function(){ runPythonScript(); });
     $("#btn-stop").click(function(){ stopPython(); });
     $("#btn-reset").click(function(){ reset(); });
@@ -189,8 +189,12 @@ function wileTrueANT(){
 function getserver() {
     //* 选择server_list 确定往不同server发送python代码
     var selectedServer = $('#server-list').val();
-    editor.find('minecraft\.Minecraft\.create\([^\)]*\)', {regExp: true});
-    editor.replaceAll('minecraft.Minecraft.create(address = "' + ip + '", port = ' + selectedServer );
+    data = editor.getValue();
+    var newdata = data.replace(/minecraft.Minecraft.create\([^\)]*\)/g,
+        'minecraft.Minecraft.create(address = "localhost", port = ' + selectedServer + ')' );
+    //editor.replaceAll('minecraft.Minecraft.create(address = "' + ip + '", port = ' + selectedServer +")" );
+    //console.log(newdata);
+    editor.setValue(newdata);
 }
 function runPythonScript() {
     var ifServer = editor.find('address = "localhost", port =', {
@@ -220,7 +224,7 @@ function runPythonScript() {
     if (!ifServer){
         //console.log(0);
        // editor.find('selectedServer');
-        editor.find('minecraft\.Minecraft\.create\([^\)]*\)', { regExp: true });        
+        editor.find('minecraft\.Minecraft\.create\([^\)]+\)', { regExp: true });        
         //editor.insert('myId = mc.getPlayerEntityId("' + playerid + '") \n' + 'pos = mc.entity.getTilePos(myId');  
         editor.replaceAll('minecraft.Minecraft.create(address = "' + ip + '", port = ' + selectedServer + ') \n' +
             'myId = mc.getPlayerEntityId("' + playerid + '") \n' + 'pos = mc.entity.getTilePos(myId');
@@ -268,12 +272,14 @@ function getLesson() {
     //setTimeout('getserver()',5000);
 }
 
-function save() {
-      var name = prompt("", ""); 
-      if (name)
-      {
-          alert("欢迎您：" + name)
-      }
+function saveCode() {
+    var name = prompt("Please type you project name.", "");
+    if (name){
+        editorModalAlert("Successfully Saved.")
+    }else{
+        editorModalAlert("Filed Saved. Please type you project name.");
+        return;
+    }
     selectedID = $('#selectSampleCode').val();
     var data = {
         "lesson":selectedID,
@@ -281,12 +287,28 @@ function save() {
         "time": new Date(),
         "name": name
     }
-    $.post("home/save", data , function( data ) {
+    $.post("code/save", data , function( data ) {
         console.log("Saved") 
     });
      console.log(1)
-    setTimeout('editorModalAlert("Successfully Saved.")', 1000);
+    //setTimeout('editorModalAlert("Successfully Saved.")', 1000);
 }
+/*  
+function loadCodeList() {
+    $.post("code/load", function (data) {
+        console.log(data);
+        if (data) {
+            
+        } else {
+            console.log("load lesson template")
+            loadLessonTemplate(selectedID, teacherMode);
+            // editor.setValue(teacherMode ? lessonFinalForIndex(selectedIndex) : lessonTemplateForIndex(selectedIndex));
+        }
+    });
+    //not now
+    //setTimeout('editorModalAlert("Successfully Loaded.")', 1000);
+}
+*/
 
 function load() {
     $.post("home/load", {"entry": ("save" + selectedID) + (teacherMode ? "teach" : "")}, function( data ) {

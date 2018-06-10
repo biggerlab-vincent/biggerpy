@@ -2,15 +2,36 @@ var mongoUtil = require('./mongoUtil');
 
 
 exports.save = function (newData, callback) {
-	var saves = mongoUtil.getDb().collection('code');
+	var code = mongoUtil.getDb().collection('code');
 	console.log(newData);
-	saves.insert({
+	code.insert({
 				userID: newData.id,
 				name: newData.name,
 				lessonID: newData.lessonId,
 				code: newData.code,
 				time: newData.time,
 				title: newData.title
+	}, function (e, o) {
+		if (o) {
+			//console.log(o);
+			callback(null, o.data)
+		} else {
+			callback(e);
+		}
+	});
+}
+
+
+exports.delete = function (newData, callback) {
+	var code = mongoUtil.getDb().collection('code');
+	console.log(newData);
+	code.findOneAndDelete({
+		userID: newData.id,
+		name: newData.name,
+		lessonID: newData.lessonId,
+		code: newData.code,
+		time: newData.time,
+		title: newData.title
 	}, function (e, o) {
 		if (o) {
 			console.log(o);
@@ -20,15 +41,15 @@ exports.save = function (newData, callback) {
 		}
 	});
 }
-
-exports.load = function (user, entry, callback) {
-	mongoUtil.getDb().collection('saves').findOne({
-		userID: getObjectId(user._id),
-		entry: entry
-	}, function (e, o) {
+exports.load = function (newData, callback) {
+	var code = mongoUtil.getDb().collection('code');
+	console.log(newData);
+	code.find({
+			},
+				function (e, o) {
 		if (o) {
 			console.log(o);
-			callback(null, o.data)
+			callback(null, o)
 		} else {
 			callback(e);
 		}

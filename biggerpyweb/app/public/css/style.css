@@ -769,7 +769,7 @@ code-list
 }
 #code-ls .well .demo-ls .demo .code-info {
   width: 90%;
-  margin: 5px auto;
+  margin: 5 auto；
 }
 #code-ls .well .demo-ls .demo .code-info span{
   float:right;

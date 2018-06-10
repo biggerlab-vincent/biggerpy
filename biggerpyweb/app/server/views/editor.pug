@@ -54,9 +54,9 @@
 		div(class='btn_small')
 			button#btn-save
 				|Save
-			button#btn-load
-				|Load
-		
+			a(href="/mycode")
+				button#btn-load
+					|Load
 		if user.userType !== "student"
 			div(class='btn_small')
 				button#btn-loadTemplate
@@ -90,4 +90,3 @@ div#editor-control
 				|Hint
 #editor
 #secondEditor.hide
-inpout#inputName(type="submit" name="Submit2" value="提交" onclick="firm()")
