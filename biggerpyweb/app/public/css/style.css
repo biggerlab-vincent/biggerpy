@@ -1,3 +1,6 @@
+.hide{
+  display:none;
+}
 
 ul li{
   list-style-type:none;
@@ -147,7 +150,7 @@ h6 {
   font-size: 24px;
   color: #fff;
   background: #323d4e;
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 20px;
 }
 #home-ls #lesson #selectSampleCode {
@@ -186,7 +189,7 @@ h6 {
 #home-ls #server {
   width: 240px;
   margin-left: 20px;
-  margin-top: 15px;
+  margin-top: 10px;
   
   font-size: 18px;
   color: #fff;
@@ -213,7 +216,8 @@ h6 {
 }
 #home-ls  #container-editor .btn_small {
   width: 240px;
-  margin-top: 15px;
+  margin-top: 10px;
+  height: 40px;
 }
 #home-ls  #container-editor .btn_small button {
   width: 100px;
@@ -221,9 +225,14 @@ h6 {
   border: 1px solid #4bf;
   border-radius: 6px;
   background-color: #323d4e;
-  
   font-size: 20px;
   color: #fff;
+}
+#home-ls  #container-editor .btn_small #btn-save {
+  float: left;
+}
+#home-ls  #container-editor .btn_small #btn-save-as {
+  float: right;
 }
 #home-ls  #container-editor .btn_small #btn-load {
   float: right;
@@ -237,7 +246,7 @@ h6 {
 #home-ls  #container-editor .btn-editor button {
   width: 240px;
   height: 40px;
-  margin-top: 15px;
+  margin-top: 10px;
   border: 1px solid #4bf;
   border-radius: 6px;
   background-color: #323d4e;
@@ -248,13 +257,13 @@ h6 {
 #home-ls  #container-editor .log-title {
   
   font-size: 30px;
-  margin-top: 29px;
+  margin-top: 25px;
   color: #fff;
 }
 #home-ls  #container-editor .python-log {
   width: 240px;
   height: 290px;
-  margin-top: 9px;
+  margin-top: 10px;
   background-color: #fff;
   border: 1px solid #4bf;
   border-radius: 6px;
@@ -731,19 +740,15 @@ manage template
 /*
 code-list
 */
-#code-ls{
-  
-}
-#code-ls .well {
-  height: 820px;
+#code-ls  {
   width: 100%;
+  overflow: hidden;
 }
-#code-ls .well .demo-ls{
+#code-ls  .demo-ls{
   width: 1100px;
-  height: 840px;
   margin: 0 auto;
 }
-#code-ls .well .demo-ls .demo {
+#code-ls  .demo-ls .demo {
   float: left;
   width: 300px;
   height: 210px;
@@ -751,26 +756,28 @@ code-list
   border-radius: 20px;
   margin: 20px;
 }
-#code-ls .well .demo-ls .demo img{
+#code-ls  .demo-ls .demo img{
   width: 50%;
   margin: 10px;
   border-radius: 10px;
 }
-#code-ls .well .demo-ls .demo .code-control {
+#code-ls  .demo-ls .demo .code-control {
   float: right;
   margin-right: 10px;
 }
-#code-ls .well .demo-ls .demo .code-control .btn{
+#code-ls  .demo-ls .demo .code-control .btn{
       width: 100px;
       display: block;
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 18px;
       text-align: center;
 }
-#code-ls .well .demo-ls .demo .code-info {
+#code-ls  .demo-ls .demo .code-info {
   width: 90%;
-  margin: 5 auto；
+    margin: auto;
+    font-size: 18px;
+    color: #777;
 }
-#code-ls .well .demo-ls .demo .code-info span{
+#code-ls  .demo-ls .demo .code-info span{
   float:right;
 }

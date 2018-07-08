@@ -55,6 +55,31 @@ module.exports = function(app) {
 		}
 	});
 
+	app.post('/code/save_as', function(req, res) {
+		//console.log(req.session);
+		//console.log(req.body);
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			// NOT SAVED!
+			//req.session.?
+		} else {
+			MYCODE.save_as({
+						id: req.session.user._id,
+						name: req.session.user.name,
+						lessonId: req.body['lesson'],
+						code: req.body['code'],
+						time: req.body['time'],
+						title: req.body['name']
+					},function (e, o) {
+						if (e) {
+							res.status(400).send('error-saving-code');
+						} else {
+							// Saved
+							res.status(200).send('ok');
+						}
+					});
+		}
+	});
 	app.post('/code/save', function(req, res) {
 		//console.log(req.session);
 		//console.log(req.body);
@@ -72,7 +97,6 @@ module.exports = function(app) {
 						title: req.body['name']
 					},function (e, o) {
 						if (e) {
-							
 							res.status(400).send('error-saving-code');
 						} else {
 							// Saved
@@ -380,7 +404,7 @@ module.exports = function(app) {
 			if (!e){
 				res.status(200).send(o);
 			} else {
-				consol
+				
 				res.status(400).send(null);
 			}
 		});
@@ -469,7 +493,7 @@ module.exports = function(app) {
 		}
 	});
 	app.post('/loadCodeList', function (req,res) {
-		//console.log(req.session);
+		//console.log(req.session.user);
 		if (req.session.user == null) {
 			//console.log(111);
 			// if user is not logged-in redirect back to login page //
@@ -482,11 +506,34 @@ module.exports = function(app) {
 					res.status(400).send(null);
 				} else {
 					// Loaded
-					console.log(o);
+					//console.log(o);
 					res.status(200).send(o)
 				}
 			});
 		}
+	});
+
+	app.post('/delete_code', function (req, res) {
+		console.log(req.body);
+		MYCODE.delete(req.body.id , function (e, o) {
+			if (!e) {
+				res.status(200).send('ok');
+				//res.redirect('/manage_template');
+			} else {
+				res.status(400).send('could not delete template');
+			}
+		});
+	
+	});
+	app.post('/edit_code', function (req, res) {
+		//console.log(req.body);
+		MYCODE.edit(req.body.id , function (e, o) {
+			if (!e) {
+				res.status(200).send(o);
+			} else {
+				res.status(400).send('could not delete template');
+			}
+		});
 	});
 
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });

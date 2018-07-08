@@ -40,7 +40,7 @@
 			option(value="4711")
 				|Server1
 			option(value="4712")
-				|Server2
+				|Server2 
 			option(value="4713")
 				|Server3
 			option(value="4714")
@@ -54,9 +54,8 @@
 		div(class='btn_small')
 			button#btn-save
 				|Save
-			a(href="/mycode")
-				button#btn-load
-					|Load
+			button#btn-save-as
+				|Save as
 		if user.userType !== "student"
 			div(class='btn_small')
 				button#btn-loadTemplate
@@ -64,6 +63,9 @@
 				button#btn-loadFinal
 					|Final
 		div(class='btn-editor')
+			a(href="/mycode")
+				button#btn-load
+					|Manage Code
 			button#btn-reset
 				|Reset to Template
 			button#btn-run

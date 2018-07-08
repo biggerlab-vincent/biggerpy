@@ -6,6 +6,7 @@ function EditorController()
     $("#btn-replace").click(function(){ replaceIP(); });
     //$("#server-list").click(function(){ getserver(); });
     $("#btn-save").click(function(){ saveCode(); });
+    $("#btn-save-as").click(function(){ saveCodeAs(); });
     //$("#btn-load").click(function () { loadCodeList(); });
     $("#btn-run").click(function(){ runPythonScript(); });
     $("#btn-stop").click(function(){ stopPython(); });
@@ -45,6 +46,28 @@ mc.postToChat("Hello Minecraft World")
     } else {
         secondEditor.setValue("# Paste your hints here");
     }
+    //接收edit_code参数
+    (function ($) {  
+        //扩展方法获取url参数  
+        $.getUrlParam = function (name) {  
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
+            if (r != null) return unescape(r[2]); return null; //返回参数值  
+    }  
+    })(jQuery);  
+    var id =  $.getUrlParam('id');
+    console.log(id);
+   if(id){
+        $.ajax({
+            type: "POST",
+            url: "edit_code",
+            data: {"id":id },
+            success: function(data){
+                console.log(data);
+                editor.setValue(data.code);
+            }
+        })
+   } 
 }
 
 
@@ -213,7 +236,7 @@ function runPythonScript() {
     }
     blocksANT();
     wileTrueANT();
-    TNTrepalce();
+    //TNTrepalce();
     //console.log(editor.getValue());
     $( "#log" ).html("Running... ");
     var playerid = user.playerid;
@@ -273,25 +296,57 @@ function getLesson() {
 }
 
 function saveCode() {
+    //接收edit_code参数
+    (function ($) {  
+        //扩展方法获取url参数  
+        $.getUrlParam = function (name) {  
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
+            if (r != null) return unescape(r[2]); return null; //返回参数值  
+    }  
+    })(jQuery);  
+    var id =  $.getUrlParam('id');
+    if (id){
+        var date  =new Date();
+        var time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        var data = {
+            "lesson": id,
+            "code": editor.getValue(),
+            "time": time,
+            "name": name
+        }
+        $.post("code/save", data, function (data) {
+            console.log("Saved");
+            editorModalAlert("Successfully Saved.");
+        });
+    }else{
+        alert("Please select your code! ");
+        return;
+    }
+    
+   
+}
+function saveCodeAs(){
+    //save as 
     var name = prompt("Please type you project name.", "");
     if (name){
-        editorModalAlert("Successfully Saved.")
+        selectedID = $('#selectSampleCode').val();
+        var date  =new Date();
+        var time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        var data = {
+            "lesson": selectedID,
+            "code": editor.getValue(),
+            "time": time,
+            "name": name
+        }
+        $.post("code/save_as", data, function (data) {
+            console.log("Saved");
+            editorModalAlert("Successfully Saved.")
+        });
     }else{
         editorModalAlert("Filed Saved. Please type you project name.");
         return;
     }
-    selectedID = $('#selectSampleCode').val();
-    var data = {
-        "lesson":selectedID,
-        "code":editor.getValue(),
-        "time": new Date(),
-        "name": name
-    }
-    $.post("code/save", data , function( data ) {
-        console.log("Saved") 
-    });
-     console.log(1)
-    //setTimeout('editorModalAlert("Successfully Saved.")', 1000);
 }
 /*  
 function loadCodeList() {

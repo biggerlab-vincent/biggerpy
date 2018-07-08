@@ -11,142 +11,8 @@ block content
 			#btn-home
 				a(href="/home" title="Editor")
 					| Editor
-	div#code-ls
-		.well
-			ul.demo-ls
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p  Author:   
-							span  #{udata.name}
-						p  Time:    
-							span #{udata.name}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-				li.demo
-					img(src="/img/code-logo.jpeg")
-					div.code-control
-						button.code_editor.btn
-							|edit
-						button.code_delete.btn
-							|delete
-					div.code-info
-						p 
-							| Author:    #{udata.name}
-						p 
-							| time:    #{udata.phone}
-		nav(aria-label="Page navigation")
-			ul.pagination
-				li
-					a(href="#" aria-label="Previous") 
-						span(aria-hidden="true") 
-							|&laquo;
-				li
-					a(href= "#")
-						|1
-				li
-					a(href= "#")
-						|2
-				li
-					a(href= "#")
-						|3
-				li
-					a(href= "#")
-						|4
-				li
-					a(href= "#")
-						|5
-				li
-					a(href="#" aria-label="Previous") 
-						span(aria-hidden="true") 
-							|&raquo;
+	div#code-ls.well
+		ul.demo-ls
 		include modals/alert
 		include modals/confirm
 
@@ -154,8 +20,6 @@ block scripts
 	script(src='/vendor/jquery-2.2.3.min.js')
 	script(src='/vendor/jquery.form.min.js')
 	script(src='/vendor/bootstrap.min.js')
-	script(type='text/javascript')                                                   
-		| var user = !{JSON.stringify(typeof(udata) != 'undefined' ? udata : { })};
 	script(src='/js/views/mycode.js')
 	script(src='/js/controllers/navbarController.js')
 	script(src='/js/controllers/mycodeController.js')
