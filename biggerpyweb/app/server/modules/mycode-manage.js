@@ -23,19 +23,23 @@ exports.save_as = function (newData, callback) {
 exports.save = function (newData, callback) {
 	var code = mongoUtil.getDb().collection('code');
 	console.log(newData);
-	code.findOneAndUpdate({_id: getObjectId(newData.id)},{
-				userID: newData.id,
-				name: newData.name,
-				lessonID: newData.lessonId,
-				code: newData.code,
-				time: newData.time
-	}, function (e, o) {
-		if (o) {
-			//console.log(o);
-			callback(null, o.data)
-		} else {
-			callback(e);
-		}
+	code.update({_id: getObjectId(newData.id)},
+		{"$set": {
+			"code": newData.code,
+			"time": newData.time,
+			}				
+		}, 
+		// options 
+		{
+			"multi" : false,  // update only one document 
+			"upsert" : false  // insert a new document, if no existing document match the query 
+		},function (e, o) {
+			if (o) {
+				console.log(o);
+				callback(null, o.data)
+			} else {
+				callback(e);
+			}
 	});
 }
 

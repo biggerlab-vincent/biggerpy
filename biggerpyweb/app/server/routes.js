@@ -89,7 +89,7 @@ module.exports = function(app) {
 			//req.session.?
 		} else {
 			MYCODE.save({
-						id: req.session.user._id,
+						id: req.body['id'],
 						name: req.session.user.name,
 						lessonId: req.body['lesson'],
 						code: req.body['code'],
